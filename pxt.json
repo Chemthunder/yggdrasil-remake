@@ -1,6 +1,6 @@
 {
     "name": "Yggdrasil",
-    "description": "",
+    "description": "A compact extension about transporting data.",
     "dependencies": {
         "device": "*"
     },
