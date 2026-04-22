@@ -1,12 +1,12 @@
+// May be needed at some point idk
 abstract class StoredData {
     public constructor() {}
 }
 
-class Key<KeyType> extends StoredData {
+class Key<KeyType> {
     protected _content: KeyType;
 
     public constructor(content: KeyType) {
-        super();
         this._content = content;
     }
 
@@ -23,12 +23,11 @@ class Key<KeyType> extends StoredData {
     }
 }
 
-class PersistentKey<KeyType> extends StoredData {
+class PersistentKey<KeyType> {
     protected _content: KeyType;
     protected _dataKey: string;
 
     public constructor(content: KeyType, dataKey: string) {
-        super();
         this._content = content;
         this._dataKey = dataKey;
     }
