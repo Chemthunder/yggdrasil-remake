@@ -12,9 +12,13 @@ const devCodes: string[] = [
     "_dev"
 ]
 
+
+
 class Entrypoint {
     protected _scene: scene.Scene;
     protected _user: any;
+
+    protected _settings: Entrypoint.Settings;
 
     public constructor() {
         this._scene = game.currentScene();
@@ -22,6 +26,14 @@ class Entrypoint {
 
     private get scene(): scene.Scene {
         return this._scene;
+    }
+
+    private get settings(): Entrypoint.Settings {
+        return this._settings;
+    }
+
+    private set settings(i: Entrypoint.Settings) {
+        this._settings = i;
     }
 
     private get user(): any {
@@ -33,11 +45,11 @@ class Entrypoint {
     }
 
     private isAdmin(str: string): boolean {
-        return yggdrasil.arrayContainsValue(adminIds, str);
+        return yggdrasil.arrayContainsValue(this.settings.getAdminIds(), str);
     }
 
     private isDev(str: string): boolean {
-        return yggdrasil.arrayContainsValue(devCodes, str);
+        return yggdrasil.arrayContainsValue(this.settings.getDevIds(), str);
     }
 
     public init() {
@@ -58,6 +70,10 @@ class Entrypoint {
         console.log(settings.readJSON("SessionUser"));
     }
 
+    public withSettings(settings: Entrypoint.Settings) {
+        this._settings = settings;
+    }
+
     public getUser(): any {
         return settings.readJSON("SessionUser");
     }
@@ -71,3 +87,40 @@ class Entrypoint {
     }
 }
 
+namespace Entrypoint {
+    export class Settings {
+        protected _adminIds: string[];
+        protected _devIds: string[];
+
+        public constructor() {
+            this._adminIds = [];
+            this._devIds = [];
+        }
+
+        private get adminIds(): string[] {
+            return this._adminIds;
+        }
+
+        private get devIds(): string [] {
+            return this._devIds;
+        }
+
+        public build(admin: string[], dev: string[]) {
+            yggdrasil.forEach(admin, function (s: string) {
+                this.adminIds.push(s);
+            }); 
+            
+            yggdrasil.forEach(dev, function (s: string) {
+                this.devIds.push(s);
+            });
+        }
+
+        public getAdminIds(): string[] {
+            return this._adminIds;
+        }
+
+        public getDevIds(): string[] {
+            return this._devIds;
+        }
+    }
+}
