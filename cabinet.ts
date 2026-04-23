@@ -24,15 +24,22 @@ class Cupboard {
 
     public log(message: string, type?: LogTypes) {
         if (type != null) {
-            let additionalText = " [" + type.toString().toUpperCase() + "]";
+            let additionalText: string;
 
-            // switch (type) {
-            //     case (LogTypes.INFO): {
-            //         additionalText = type.toString()
-            //     }
-            // }
+            switch (type) {
+                case (LogTypes.INFO): {
+                    additionalText = "info";
+                }
+                case (LogTypes.WARN): {
+                    additionalText = "warn";
+                }
+                case LogTypes.ERROR: additionalText = "error";
+                case LogTypes.DEBUG: additionalText = "debug";
+                default: additionalText = "";
+            }
 
-            console.log(this.getProjectKey() + message + additionalText);
+            let final = " [" + additionalText.toUpperCase() + "]";
+            console.log(this.getProjectKey() + message + final);
         } else {
             console.log(this.getProjectKey() + message);
         }
