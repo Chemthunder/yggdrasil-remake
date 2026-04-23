@@ -7,7 +7,10 @@ const adminIds: string[] = [
     "chemthunder"
 ]
 
-
+const devCodes: string[] = [
+    "dev",
+    "_dev"
+]
 
 class Entrypoint {
     protected _scene: scene.Scene;
@@ -33,13 +36,18 @@ class Entrypoint {
         return yggdrasil.arrayContainsValue(adminIds, str);
     }
 
+    private isDev(str: string): boolean {
+        return yggdrasil.arrayContainsValue(devCodes, str);
+    }
+
     public init() {
         if (!yggdrasil.isDataReal("SessionUser")) {
             let username = game.askForString("Input username");
         
             let sessionId = {
                 name: username,
-                isAdmin: this.isAdmin(username)
+                isAdmin: this.isAdmin(username),
+                isDev: this.isDev(username)
             }
 
             this.user = sessionId;
@@ -52,6 +60,14 @@ class Entrypoint {
 
     public getUser(): any {
         return settings.readJSON("SessionUser");
+    }
+
+    public userIsAdmin(): boolean {
+        return this.getUser().isAdmin;
+    }
+
+    public isDevInstance(): boolean {
+        return this.getUser().isDev;
     }
 }
 

@@ -10,7 +10,8 @@
         "assets.json",
         "key.ts",
         "core.ts",
-        "authlib.ts"
+        "authlib.ts",
+        "cabinet.ts"
     ],
     "testFiles": [
         "test.ts"
