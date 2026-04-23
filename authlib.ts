@@ -106,13 +106,13 @@ namespace Entrypoint {
         }
 
         public build(admin: string[], dev: string[]) {
-            yggdrasil.forEach(admin, function (s: string) {
-                this.adminIds.push(s);
-            }); 
+            for (let el of admin) {
+                this.getAdminIds().push(el);
+            }
             
-            yggdrasil.forEach(dev, function (s: string) {
-                this.devIds.push(s);
-            });
+            for (let el of dev) {
+                this.getDevIds().push(el);
+            }
         }
 
         public getAdminIds(): string[] {
