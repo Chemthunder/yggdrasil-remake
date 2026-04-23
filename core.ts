@@ -32,6 +32,19 @@ namespace yggdrasil {
     }
 
     /**
+     * Creates a new Cabinet for your project..
+     * @param id The ID of the Cabinet. Should be unique.
+     */
+    //% block="create Cabinet $id"
+    //% blockId=yggcreatecabinet
+    //% id.defl="myProject"
+    //% blockSetVariable=myCabinet
+    //% expandableArgumentMode=toggle
+    export function createCabinet(id: string): Cabinet {
+        return new Cabinet(id);
+    }
+
+    /**
      * Clears an array of all of its elements.
      * @param array The array to clear.
      */

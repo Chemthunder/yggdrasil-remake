@@ -1,19 +1,3 @@
-// usernames and stuff
-// session is the currently running game.
-// stores a scene and such bleh bleh bleh
-
-const adminIds: string[] = [
-    "chem",
-    "chemthunder"
-]
-
-const devCodes: string[] = [
-    "dev",
-    "_dev"
-]
-
-
-
 class Entrypoint {
     protected _scene: scene.Scene;
     protected _user: any;
@@ -123,4 +107,8 @@ namespace Entrypoint {
             return this._devIds;
         }
     }
+}
+
+namespace yggdrasil {
+    // advanced, create and init a session
 }

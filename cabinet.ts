@@ -7,7 +7,7 @@ enum LogTypes {
     DEBUG
 }
 
-class Cupboard {
+class Cabinet {
     protected _id: string;
 
     public constructor(id: string) {
@@ -29,12 +29,20 @@ class Cupboard {
             switch (type) {
                 case (LogTypes.INFO): {
                     additionalText = "info";
+                    break;
                 }
                 case (LogTypes.WARN): {
                     additionalText = "warn";
+                    break;
                 }
-                case LogTypes.ERROR: additionalText = "error";
-                case LogTypes.DEBUG: additionalText = "debug";
+                case (LogTypes.ERROR): {
+                    additionalText = "error";
+                    break;
+                }
+                case (LogTypes.DEBUG): {
+                    additionalText = "debug";
+                    break;
+                }
                 default: additionalText = "";
             }
 
@@ -45,6 +53,3 @@ class Cupboard {
         }
     } 
 }
-
-let logger = new Cupboard("test");
-logger.log("bingus", LogTypes.WARN);
