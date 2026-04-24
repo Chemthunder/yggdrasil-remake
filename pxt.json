@@ -11,7 +11,9 @@
         "key.ts",
         "core.ts",
         "authlib.ts",
-        "cabinet.ts"
+        "cabinet.ts",
+        "creation.ts",
+        "json.ts"
     ],
     "testFiles": [
         "test.ts"

@@ -37,20 +37,19 @@ class Entrypoint {
     }
 
     public init() {
-        if (!yggdrasil.isDataReal("SessionUser")) {
-            let username = game.askForString("Input username");
-        
-            let sessionId = {
-                name: username,
-                isAdmin: this.isAdmin(username),
-                isDev: this.isDev(username)
-            }
+        if (yggdrasil.isDataReal("SessionUser")) return;
 
-            this.user = sessionId;
-            console.log(sessionId);
-            settings.writeJSON("SessionUser", this.user);
+        let username = game.askForString("Input username");
+
+        let sessionId = {
+            name: username,
+            isAdmin: this.isAdmin(username),
+            isDev: this.isDev(username)
         }
 
+        this.user = sessionId;
+        console.log(sessionId);
+        settings.writeJSON("SessionUser", this.user);
         console.log(settings.readJSON("SessionUser"));
     }
 
@@ -85,7 +84,7 @@ namespace Entrypoint {
             return this._adminIds;
         }
 
-        private get devIds(): string [] {
+        private get devIds(): string[] {
             return this._devIds;
         }
 
@@ -93,7 +92,7 @@ namespace Entrypoint {
             for (let el of admin) {
                 this.getAdminIds().push(el);
             }
-            
+
             for (let el of dev) {
                 this.getDevIds().push(el);
             }

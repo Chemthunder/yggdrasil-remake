@@ -1,8 +1,3 @@
-// May be needed at some point idk
-abstract class StoredData {
-    public constructor() {}
-}
-
 class Key<KeyType> {
     protected _content: KeyType;
 
@@ -51,6 +46,8 @@ class PersistentKey<KeyType> {
 
         console.log(converted.transmittedData)
         settings.writeJSON(namespace + "$" + this.dataKey, converted);
+
+        
     }
 }
 

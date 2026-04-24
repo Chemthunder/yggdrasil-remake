@@ -1,12 +1,5 @@
 // sophisticated logging
 
-enum LogTypes {
-    INFO,
-    WARN,
-    ERROR,
-    DEBUG
-}
-
 class Cabinet {
     protected _id: string;
 
@@ -52,4 +45,11 @@ class Cabinet {
             console.log(this.getProjectKey() + message);
         }
     } 
+}
+
+enum LogTypes {
+    INFO,
+    WARN,
+    ERROR,
+    DEBUG
 }
