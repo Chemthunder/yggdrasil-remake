@@ -45,9 +45,7 @@ class PersistentKey<KeyType> {
         }
 
         console.log(converted.transmittedData)
-        settings.writeJSON(namespace + "$" + this.dataKey, converted);
-
-        
+        settings.writeJSON(namespace + "$" + this.dataKey, converted);        
     }
 }
 

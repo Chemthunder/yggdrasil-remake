@@ -45,6 +45,10 @@ class Cabinet {
             console.log(this.getProjectKey() + message);
         }
     } 
+
+    public error(code: ErrorCode) {
+        this.log(code.name + ": " + code.reason + code.isFatal ? " - Stopping instance." : " - Passing on.");
+    }
 }
 
 enum LogTypes {
@@ -53,3 +57,41 @@ enum LogTypes {
     ERROR,
     DEBUG
 }
+
+class ErrorCode {
+    protected _name: string;
+    protected _reason: string;
+    protected _isFatal: boolean;
+
+    public constructor(name: string, reason: string, isFatal: boolean) {
+        this._name = name;
+        this._reason = reason;
+        this._isFatal = isFatal;
+    }
+
+    public get name(): string {
+        return this._name;
+    }
+
+    public get reason(): string {
+        return this._reason;
+    }
+
+    public get isFatal(): boolean {
+        return this._isFatal;
+    }
+}
+
+// namespace ErrorCodes {
+//     let nextCode: number;
+
+//     export function create(reason: string) {
+//         if (nextCode == null) nextCode = 1000;
+//         return nextCode++;
+//     }
+
+//     export const NotAvailable = create("Parameter or variable is not available.");
+//     export const Multipurpose = create("Refer to source code for error reasoning.");
+//     export const Debug = create("Caused by internal debug errors.");
+//     export const NullObject = create("The object accessed returns null.");
+// }

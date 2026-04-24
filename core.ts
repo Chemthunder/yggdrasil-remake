@@ -3,6 +3,10 @@
  */
 //% weight=30 color=#67cfa4 icon="\uf0ac"
 namespace yggdrasil {
+    // Main initializer for Yggdrasil.
+    export const Core = new Cabinet("yggdrasil-core");
+
+
     /**
      * Creates a new Key of the specified type.
      * @param content The content for the Key to hold.
@@ -90,5 +94,46 @@ namespace yggdrasil {
             s(val);
         }
     }
+
+    export function configDev(session: Entrypoint, a: (s: Entrypoint) => void) {
+        session.isDevInstance() ? a(session) : Core.error(new ErrorCode("Invalid Permissions", "Session User permissions aren't high enough.", false));
+    }
 }
 
+namespace yggdebug {
+    export function buildTestingInstance() {
+        game.consoleOverlay.setVisible(true, 1);
+
+        let session = new Entrypoint();
+        let seshSettings = new Entrypoint.Settings();
+
+        seshSettings.build(
+            [
+                "admin",
+                "Admin",
+                "a",
+                "A"
+            ],
+            [
+                "dev",
+                "_dev",
+                "DEV",
+                "dEv",
+                "Dev",
+                "Chemthunder",
+                "chemthunder",
+                "chem",
+                "Chem"
+            ]
+        )
+
+        session.withSettings(seshSettings);
+        session.init();
+    }
+
+    export function enableDataDeletion() {
+        controller.A.onEvent(ControllerButtonEvent.Pressed, function debug() {
+            yggdrasil.clearData();
+        });
+    }
+}
