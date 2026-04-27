@@ -31,6 +31,12 @@ namespace game {
         game.setGameOverPlayable(true, winSound, false);
         game.setGameOverSound(true, winMelody);
     }
+
+    export function setDialogSettings(frame: Image, cursor: Image, color?: number) {
+        game.setDialogFrame(frame);
+        game.setDialogCursor(cursor);
+        game.setDialogTextColor(color);
+    }
 }
 
 namespace info {
