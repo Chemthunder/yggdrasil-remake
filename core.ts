@@ -6,16 +6,15 @@ namespace yggdrasil {
     // Main initializer for Yggdrasil.
     export const Core = new Cabinet("yggdrasil-core");
 
-
     /**
      * Creates a new Key of the specified type.
      * @param content The content for the Key to hold.
      */
     //% block="create Key with $content"
     //% blockId=yggcreatekey
-    //% content.defl=myVariable
-    //% blockSetVariable=myKey
     //% expandableArgumentMode=toggle
+    //% blockSetVariable=myKey
+    //% content.defl=myVariable
     export function createKey<T>(content: T): Key<T> {
         return new Key<T>(content);
     }
@@ -27,10 +26,10 @@ namespace yggdrasil {
      */
     //% block="create PersistentKey with $content at $location"
     //% blockId=yggcreateperskey
+    //% expandableArgumentMode=toggle
+    //% blockSetVariable=myPersKey
     //% content.defl=myVariable
     //% location.defl="myKeyLocation"
-    //% blockSetVariable=myPersKey
-    //% expandableArgumentMode=toggle
     export function createPersistentKey<T>(content: T, location: string): PersistentKey<T> {
         return new PersistentKey<T>(content, location);
     }
