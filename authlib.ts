@@ -37,6 +37,8 @@ class Entrypoint {
     }
 
     public init() {
+        console.log(yggdrasil.isDataReal("SessionUser") ? settings.readJSON("SessionUser") : "No user set for session.");
+
         if (yggdrasil.isDataReal("SessionUser")) return;
 
         let username = game.askForString("Input username");
@@ -48,13 +50,12 @@ class Entrypoint {
         }
 
         this.user = sessionId;
-        console.log(sessionId);
         settings.writeJSON("SessionUser", this.user);
         console.log(settings.readJSON("SessionUser"));
     }
 
-    public withSettings(settings: Entrypoint.Settings) {
-        this._settings = settings;
+    public withSettings(i: Entrypoint.Settings) {
+        this._settings = i;
     }
 
     public getUser(): any {
@@ -110,4 +111,8 @@ namespace Entrypoint {
 
 namespace yggdrasil {
     // advanced, create and init a session
+
+    export function beginSession(): Entrypoint {
+        return new Entrypoint();
+    }
 }

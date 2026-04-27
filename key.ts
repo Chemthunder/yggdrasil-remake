@@ -39,13 +39,18 @@ class PersistentKey<KeyType> {
         return this._dataKey;
     }
 
-    public write(namespace?: string) {
-        let converted = {
-            transmittedData: this.content
-        }
+    public write() {
+        settings.writeJSON(this.dataKey, {
+            data: this.content
+        });        
+    }
 
-        console.log(converted.transmittedData)
-        settings.writeJSON(namespace + "$" + this.dataKey, converted);        
+    public unpack(): KeyType {
+        return this._content;
+    }
+
+    public getWrittenData(): KeyType {
+        return settings.readJSON(this.dataKey).data;
     }
 }
 
@@ -95,5 +100,16 @@ namespace yggdrasil {
     //% key.defl="myPersKey"
     export function removeSpecficData(key: string) {
         settings.remove(key);
+    }
+
+    /**
+     * Gets the content of a persistent key from a string.
+     * @param location The string ID of the persistent key.
+     */
+    //% block="get persistent key data at $location"
+    //% blockId=ygggetperskeydata
+    //% location.defl="myPersKey"
+    export function getPersKeyData(location: string) {
+        return settings.readJSON(location).data;
     }
 }

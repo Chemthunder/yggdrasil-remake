@@ -47,7 +47,11 @@ class Cabinet {
     } 
 
     public error(code: ErrorCode) {
-        this.log(code.name + ": " + code.reason + code.isFatal ? " - Stopping instance." : " - Passing on.");
+        this.log("An error has occurred!");
+        this.log(code.name + ": " + code.reason);
+        this.log(code.isFatal ? "Stopping instance..." : "Passing on...");
+
+        if (code.isFatal) control.fail(code.name);
     }
 }
 
@@ -82,16 +86,8 @@ class ErrorCode {
     }
 }
 
-// namespace ErrorCodes {
-//     let nextCode: number;
+namespace ErrorCodes {
+    export const CRASH = new ErrorCode("Game Crashed!", "Refer to source for more details.", true);
 
-//     export function create(reason: string) {
-//         if (nextCode == null) nextCode = 1000;
-//         return nextCode++;
-//     }
-
-//     export const NotAvailable = create("Parameter or variable is not available.");
-//     export const Multipurpose = create("Refer to source code for error reasoning.");
-//     export const Debug = create("Caused by internal debug errors.");
-//     export const NullObject = create("The object accessed returns null.");
-// }
+    export const PASS = new ErrorCode("Unknown Error", "Refer to source for more details.", false);
+}

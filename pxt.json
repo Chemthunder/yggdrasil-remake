@@ -12,8 +12,8 @@
         "core.ts",
         "authlib.ts",
         "cabinet.ts",
-        "creation.ts",
-        "json.ts"
+        "json.ts",
+        "compat.ts"
     ],
     "testFiles": [
         "test.ts"
