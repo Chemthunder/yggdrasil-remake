@@ -7,8 +7,9 @@ namespace scene {
      * @param icon The icon of the button.
      * @param a The code to run when the button is pressed.
      */
-    //% block="add system menu entry $name $icon $a"
+    //% block="add system menu entry $name $icon"
     //% blockId=yggaddsystemmenuentry
+    //% icon.shadow=screen_image_picker
     export function addSystemMenuEntry(name: string, icon: Image, a: () => void) {
         scene.systemMenu.addEntry(() => name, a, icon);
     }
@@ -47,8 +48,12 @@ namespace info {
      * @param fontColor The color of the font for the UI.
      * @param borderColor The color of the border for the UI.
      */
-    //% block="edit ui $lifeImage $backgroundColor $fontColor $borderColor"
+    //% block="edit ui | life image $lifeImage background color $backgroundColor font color $fontColor border color $borderColor"
     //% blockId=yggeditui
+    //% lifeImage.shadow=screen_image_picker
+    //% backgroundColor.shadow=colorindexpicker
+    //% fontColor.shadow=colorindexpicker
+    //% borderColor.shadow=colorindexpicker
     export function editUI(lifeImage?: Image, backgroundColor?: number, fontColor?: number, borderColor?: number) {
         info.setFontColor(fontColor);
         info.setBackgroundColor(backgroundColor);

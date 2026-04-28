@@ -42,7 +42,7 @@ class PersistentKey<KeyType> {
     public write() {
         settings.writeJSON(this.dataKey, {
             data: this.content
-        });        
+        });
     }
 
     public unpack(): KeyType {
@@ -59,9 +59,8 @@ namespace yggdrasil {
      * Checks if the ID of a PersistentKey exists.
      * @param key The ID of the PersistentKey to check for.
      */
-    //% block="is Key $key real"
+    //% block="is Key $key=variables_get(myPersKey) real"
     //% blockId=yggisdatareal
-    //% key.defl="myPersKey"
     export function isDataReal(key: string): boolean {
         return settings.exists(key);
     }
@@ -71,10 +70,8 @@ namespace yggdrasil {
      * @param data The data to write.
      * @param key The key of the data
      */
-    //% block="write data $data at $key"
+    //% block="write data $data=variables_get(myVariable) at $key=variables_get(myKey)"
     //% blockId=yggwritemiscdata
-    //% data.defl="myVariable"
-    //% key.defl="myKey"
     export function writeMiscDataToPers(data: any, key: string) {
         settings.writeJSON(key, {
             data: data
@@ -95,9 +92,8 @@ namespace yggdrasil {
      * Clears a specified piece of data.
      * @param key The key of the data to remove.
      */
-    //% block="remove data at $key"
+    //% block="remove data at $key=variables_get(myPersKey)"
     //% blockId=yggremovespecificdata
-    //% key.defl="myPersKey"
     export function removeSpecficData(key: string) {
         settings.remove(key);
     }
@@ -106,9 +102,8 @@ namespace yggdrasil {
      * Gets the content of a persistent key from a string.
      * @param location The string ID of the persistent key.
      */
-    //% block="get persistent key data at $location"
+    //% block="get persistent key data at $location=variables_get(myPersKey)"
     //% blockId=ygggetperskeydata
-    //% location.defl="myPersKey"
     export function getPersKeyData(location: string) {
         return settings.readJSON(location).data;
     }

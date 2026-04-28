@@ -44,7 +44,7 @@ class Cabinet {
         } else {
             console.log(this.getProjectKey() + message);
         }
-    } 
+    }
 
     public error(code: ErrorCode) {
         this.log("An error has occurred!");
