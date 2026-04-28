@@ -1,3 +1,6 @@
+let activeSessions: Entrypoint[] = [];
+let primarySession: Entrypoint = null;
+
 class Entrypoint {
     protected _scene: scene.Scene;
     protected _user: any;
@@ -37,20 +40,20 @@ class Entrypoint {
     }
 
     public init() {
+        activeSessions.push(this);
         console.log(yggdrasil.isDataReal("SessionUser") ? settings.readJSON("SessionUser") : "No user set for session.");
 
         if (yggdrasil.isDataReal("SessionUser")) return;
 
         let username = game.askForString("Input username");
 
-        let sessionId = {
+        let data = {
             name: username,
             isAdmin: this.isAdmin(username),
             isDev: this.isDev(username)
         }
 
-        this.user = sessionId;
-        settings.writeJSON("SessionUser", this.user);
+        settings.writeJSON("SessionUser", data);
         console.log(settings.readJSON("SessionUser"));
     }
 
@@ -116,3 +119,27 @@ namespace yggdrasil {
         return new Entrypoint();
     }
 }
+
+// Internal operations conducted to manage features behind the scenes.
+namespace yggdrasil.internal {
+    export const ENTRYPOINT_OPERATION_FAILURE_FETCH = new ErrorCode("Entrypoint Operation Failure", "Failed to fetch primary entrypoint for program: " + control.programName(), true);
+    export const ENTRYPOINT_OPERATION_FAILURE_SET = new ErrorCode("Entrypoint Operation Failure", "Failed to set primary session for program.", true);
+
+
+    export function getPrimaryEntrypoint(): Entrypoint {
+        if (activeSessions.length > 0) {
+            try {
+                return activeSessions[0]; // returns the first session to load.
+            } catch {
+                Core.error(ENTRYPOINT_OPERATION_FAILURE_FETCH); // safeguard just in case :3
+            }
+            Core.error(ENTRYPOINT_OPERATION_FAILURE_SET);
+            return null;
+        } else {
+            return null;
+        }
+    }
+}
+
+yggdebug.buildTestingInstance();
+yggdebug.enableDataDeletion();

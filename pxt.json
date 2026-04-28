@@ -1,6 +1,6 @@
 {
     "name": "Yggdrasil",
-    "description": "A compact extension about transporting data.",
+    "description": "A compact extension containing various utils used by Chemthunder.",
     "dependencies": {
         "device": "*"
     },
