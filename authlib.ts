@@ -140,6 +140,3 @@ namespace yggdrasil.internal {
         }
     }
 }
-
-yggdebug.buildTestingInstance();
-yggdebug.enableDataDeletion();
